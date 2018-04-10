@@ -3,7 +3,7 @@ html, body{
 }
 
 body { 
-    background-image: url(assets/images/golden-gate-bridge-1081782.jpg);
+    background-image: url(../images/golden-gate-bridge-1081782.jpg);
     background-position: center center;
     background-repeat:  no-repeat;
     background-attachment: fixed;
