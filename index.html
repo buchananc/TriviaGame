@@ -15,7 +15,7 @@
                 <h2>Fuller House Trivia</h2>
                 <br>
                 <p>You will have 1 minute to answer 10 questions.</p>
-                <button type="button" id="startbtn" class="btn btn primary black-background white">Got it Dude!</button>
+                <button type="button" id="startbtn" class="btn btn primary">Got it Dude!</button>
             </div>
             
             <div id="startScreen">
@@ -63,9 +63,15 @@
                     <br>
                     <input type="radio" id="q4" name="question4" value="robert">Robert
                     <br>
-                    
-                    <!-- <button type="button" id="submitAnswers">Submit</button> -->
+                    <span ></span>
+                    <!-- <a href="JavaScript:getScore(document.forms['quiz']);">Mark Answers</a> -->
+                    <br>
+                    <p>Percentage: 
+                        <input type="text" name="percentage" readonly>
+                    </p>
                 </form>
+                <button type="button" id="submitAnswers">Submit</button>
+
                 <div id="playerAnswers">
                     <h2>Here's your results:</h2>
                     <p id="correctChoices">Correct Answers: </p>

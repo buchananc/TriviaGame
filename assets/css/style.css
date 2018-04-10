@@ -1,0 +1,14 @@
+html, body{
+    height: 100%;
+}
+
+body { 
+    background-image: url(assets/images/golden-gate-bridge-1081782.jpg);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+
+}
+
