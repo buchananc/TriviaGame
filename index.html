@@ -3,26 +3,85 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Page Title</title>
+        <title>Fuller House Trivia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
 
     </head>
     <body>
-        
-        <div id="timer">1:00</div>
-        <form name="quiz" method="post" name="buttons" id="quiz" onsubmit="return false">What is DJs favorite saying?
-            <br>
-            <input type="radio" name="ans" value="wrong"> Got it dude!
-            <input type="radio" name="ans" value="correct"> Oh mylanta!
-            <input type="radio" name="ans" value="wrong"> Cut it out!
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="container">
+            <div id="welcomeScreen">
+                <h3>Welcome to</h3>
+                <h2>Fuller House Trivia</h2>
+                <br>
+                <p>You will have 1 minute to answer 10 questions.</p>
+                <button type="button" id="startbtn" class="btn btn primary black-background white">Got it Dude!</button>
+            </div>
+            
+            <div id="startScreen">
+                <header>Fuller House Trivia</header>
+                <div id="timeLeft"></div>
+            </div>
+            
+            <div id="questions">
+                <form id="quiz" name="quiz">
+                    <p>What is DJs favorite saying?</p>
+                    <input type="radio" id="q1" name="question1" value="whoaBaby">Whoa baby!
+                    <br>
+                    <input type="radio" id="q1" name="question1" value="mylanta">Oh Mylanta!
+                    <br>
+                    <input type="radio" id="q1" name="question1" value="cutItOut">Cut. It. Out!
+                    <br>
+                    <input type="radio" id="q1" name="question1" value="haveMercy">Have mercy!
 
-        <!-- <button class="submit" onclick="return handleClick();" type="submit">Submit</button> -->
+                    <p>Which actress portrayed middle sister Stephanie Tanner?</p>
+                    <input type="radio" id="q2" name="question2" value="cameron">Candace Cameron
+                    <br>
+                    <input type="radio" id="q2" name="question2" value="olsen">Ashley Olsen
+                    <br>
+                    <input type="radio" id="q2" name="question2" value="sweetin">Jodie Sweetin
+                    <br>
+                    <input type="radio" id="q2" name="question2" value="barber">Andrea Barber
+                    <br>
+
+                    <p>In Full House, Danny Tanner was a widower. Which of his daughters took on the role of widow in Fuller House?</p>
+                    <input type="radio" id="q3" name="question3" value="dj">D.J.
+                    <br>
+                    <input type="radio" id="q3" name="question3" value="stephanie">Stephanie
+                    <br>
+                    <input type="radio" id="q3" name="question3" value="michelle">Michelle
+                    <br>
+                    <input type="radio" id="q3" name="question3" value="kimmy">Kimmy
+                    <br>
+
+                    <p>Which of D.J. Tanner's high school boyfriends returned in season 1?</p>
+                    <input type="radio" id="q4" name="question4" value="scott">Scott
+                    <br>
+                    <input type="radio" id="q4" name="question4" value="steve">Steve
+                    <br>
+                    <input type="radio" id="q4" name="question4" value="dave">Dave
+                    <br>
+                    <input type="radio" id="q4" name="question4" value="robert">Robert
+                    <br>
+                    
+                    <!-- <button type="button" id="submitAnswers">Submit</button> -->
+                </form>
+                <div id="playerAnswers">
+                    <h2>Here's your results:</h2>
+                    <p id="correctChoices">Correct Answers: </p>
+                    <p id="wrongChoices">Wrong Answers: </p>
+                </div>
+                
+                <div id="results">
+                    <h2>Time's Up!</h2>
+                    <p>Here's your results:</p>
+                    <p id="correctNoTimeLeft">Correct Answers: </p>
+                    <p id="wrongNoTimeLeft">Wrong Answers: </p>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./assets/javascript/app.js"></script>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./assets/javascript/app.js"></script>
     
 </html>

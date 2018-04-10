@@ -19,36 +19,48 @@
 
 
 $(document).ready(function () {
-    $("input[type='submit']").click(function (event) {
-        if ($("input[type='radio']").is(':checked')) {
-            console.log($("input[type='radio']:checked").val());
+    $('#questions').hide();
+    $('#startScreen').hide();
+    $('#playerAnswers').hide();
+    $('#results').hide();
+    $('#timer').hide();
+
+});
+
+    // click to start then display quesions
+    $("button").click(function () {
+        $('#welcomeScreen').hide();
+        $('#questions').show();
+        $('#startScreen').show();
+        $('#timer').show();
+        countdown();
+        
+        //variables
+        var answered;
+        var unanswered;
+        var seconds;
+        var incorrectAnswer;
+        var correctAnswer;
+
+        //timer function
+        function countdown() {
+            seconds = 60;
+            $('#timeLeft').html('<h3>Time Remaining: ' + seconds + '</h3>');
+            answered = true;
+            //sets timer to go down
+            time = setInterval(showCountdown, 1000);
         }
-        event.preventDefault();
-    });
-    var timeoutHandle; //might need to move above event function if time doesn't start as soon as page loads
-    function countdown(minutes) {
-        var seconds = 60;
-        var mins = minutes
-        function tick() {
-            var counter = document.getElementById("timer");
-            var current_minutes = mins - 1
+
+        function showCountdown() {
             seconds--;
-            counter.innerHTML =
-                current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-            if (seconds > 0) {
-                timeoutHandle = setTimeout(tick, 1000);
-            } else {
-
-                if (mins > 1) {
-
-                    // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
-                    setTimeout(function () { countdown(mins - 1); }, 1000);
-
-                }
+            $('#timeLeft').html('<h3>Time Remaining: ' + seconds + '</h3>');
+            if (seconds < 1) {
+                clearInterval(time);
+                answered = false;
+                answerPage();
             }
         }
-        tick();
-    }
-
-    countdown(1);
+        //end of Timer function
 });
+
+ //end of Trivia Game
