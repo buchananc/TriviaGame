@@ -1,117 +1,286 @@
-// You'll create a trivia (form html) with multiple choice.
-// https://www.w3schools.com/html/html_forms.asp
-    //How do I represent multiple choice within a form ? I would use inputs.  Inputs have types(radio).
-    //https://www.w3schools.com/html/tryit.asp?filename=tryhtml_radio
-//How do you know which button is selected?
-    //https://stackoverflow.com/questions/596351/how-can-i-know-which-radio-button-is-selected-via-jquery
-
-    //What is the correct answer? 
-    //https://stackoverflow.com/questions/13935786/quiz-counts-radio-button-values
-// The player will have a limited amount of time to finish the quiz.
-    //https://stackoverflow.com/questions/5665915/how-to-check-a-radio-button-with-jquery
-    //Timer: https://stackoverflow.com/questions/6893130/how-to-set-one-minute-counter-in-javascript
-    //http://navaneeth.me/simple-countdown-timer-using-javascript/#.Wsp_gdPwY1g
-
-// The game ends when the time runs out.The page will reveal the number of questions that players answer correctly and incorrectly.
-//     Don't let the player pick more than one answer per question.
-
-// Don't forget to include a countdown timer.
-
-
 $(document).ready(function () {
-    $('#questions').hide();
     $('#startScreen').hide();
-    $('#playerAnswers').hide();
-    $('#results').hide();
-    $('#timer').hide();
-
+    $('.quiz-container').hide();
+    $('#previous').hide();
+    $('#next').hide();
+    $('#submit').hide();
+    $('#timeLeft').hide();
+    $('#results').hide(); //show at end of quiz
+    $('#playerAnswers').hide(); //show at end of quiz
+    // $('#currentQuestion').hide();
+    $('.question').hide();
+    $('.answers').hide();
 });
 
-    // click to start then display questions
-    $("#startbtn").click(function () {
-        $('#welcomeScreen').hide();
-        $('#questions').show();
-        $('#startScreen').show();
-        $('#timer').show();
-        run();
-        correctAnswer = 0;
-        incorrectAnswer = 0;
-        unanswered = 0;
-        
-        //variables
-        var answered;
-        var unanswered;
-        var incorrectAnswer;
-        var correctAnswer;
-        var count = 60;
-        var intervalId;
+// click to start then display questions
+$("#startbtn").click(function () {
+    $('#welcomeScreen').hide();
+    $('#startScreen').show();
+    $('.quiz-container').show();
+    $('#previous').show();
+    $('#next').show();
+    $('#submit').show();
+    $('#timeLeft').show();
+    // $('#currentQuestion').show();
+    $('.question').show();
+    $('.answers').show();
 
-        //timer function (interval-solved class solution)
-        //when button is clicked, they will trigger the stop or run
-        $("#submitAnswers").on("click", stop);
-        $("#timeLeft").on("click", run);
-
-        function run() {
-            clearInterval(intervalId);
-            intervalId = setInterval(decrement, 1000);   
+    const triviaQuestions = [
+        {
+            question: "What is Kimmy's signature dance move called?",
+            answers: {
+                a: "Gibbler Gallop",
+                b: "Gibbler Gump",
+                c: "Gibbler Golosh",
+                d: "Gibbler Glitz"
+            },
+            correctAnswer: "a"
+        }, {
+            question: "What epic 39th birthday present did Steve get DJ?",
+            answers: {
+                a: "Amusement park passes",
+                b: "Hello Kitty Land",
+                c: "A trip to Tokyo",
+                d: "Tickets to New Kids on the Block"
+            },
+            correctAnswer: "d"
+        }, {
+            question: "What kind of doctor is Steve?",
+            answers: {
+                a: "Veterinarian",
+                b: "Podiatrist",
+                c: "Dentist",
+                d: "Pediatrician"
+            },
+            correctAnswer: "b"
+        }, {
+            question: "Who had their first kiss on the Fuller House show?",
+            answers: {
+                a: "Max",
+                b: "Ramona",
+                c: "Jackson",
+                d: "Alex"
+            },
+            correctAnswer: "c"
+        }, {
+            question: "What are DJ's three kid's names?",
+            answers: {
+                a: "Ramona, Max, Jackson",
+                b: "Tommy Jr., Max, Jackson",
+                c: "Tommy Jr., Ramona, Max",
+                d: "Ramona, Jackson, Tommy Jr."
+            },
+            correctAnswer: "b"
+        }, {
+            question: "Who does Stephanie fall in love with?",
+            answers: {
+                a: "Jimmy Gibbler",
+                b: "Matt Harmon",
+                c: "Steve Hale",
+                d: "Fernando Guerrero"
+            },
+            correctAnswer: "a"
+        }, {
+            question: "Who has the most kids?",
+            answers: {
+                a: "Uncle Jesse",
+                b: "Danny Tanner",
+                c: "DJ Tanner",
+                d: "Uncle Joey"
+            },
+            correctAnswer: "d"
+        }, {
+            question: "Where did Fernando and Kimmy meet?",
+            answers: {
+                a: "At a club",
+                b: "At a hair salon",
+                c: "At a race",
+                d: "At a concert"
+            },
+            correctAnswer: "b"
+        }, {
+            question: "What is the name of Max's dog?",
+            answers: {
+                a: "Comet Jr.",
+                b: "Comet",
+                c: "Cosmo",
+                d: "Crater"
+            },
+            correctAnswer: "c"
+        }, {
+            question: "What was Stephanie's DJ name when she lived in England?",
+            answers: {
+                a: "DJ San Fran",
+                b: "DJ She Wolf",
+                c: "DJ Steph",
+                d: "DJ Tanner"
+            },
+            correctAnswer: "d"
+        }, {
+            question: "What was a 1992 hit song for Uncle Jesse in Japan?",
+            answers: {
+                a: "Forever",
+                b: "Every Word I Say",
+                c: "Happy Loving You",
+                d: "Live in Your Heart"
+            },
+            correctAnswer: "a"
         }
+    ]; //end of trivia questions
 
-        function decrement() {
-            //decrease count by 1
-            count--;
-            //show timer in tag id
-            $("#timeLeft").html("<h2>" + count + "</h2>");
+    //////////////////Create Quiz/////////////////////////////
 
-            //once timer hits zero
-            if (count === 0) {
-                stop();
+    function buildQuiz() {
+        //place to store HTML output
+        const output = [];
 
-                alert("Times Up!");
+        //for each question
+        triviaQuestions.forEach((currentQuestion, questionNumber) => {
+            //store the list of answer choices
+            const answers = [];
+
+            //and each available answer
+            for (letter in currentQuestion.answers) {
+                //...add HTML radio button
+                answers.push(
+                    `<label>
+                    <input type="radio" name="question${questionNumber}" value="${letter}'>
+                    ${letter} :
+                    ${currentQuestion.answers[letter]}
+                    </label>`
+                );
             }
-        }
-        //clear intervalId
-        function stop() {
-            clearInterval(intervalId);
-        }
-        //end of Timer function
 
-        //Score answers
-        function getScore(form) {
-            var answersAndObjects = new Array();
-            answersAndObjects[0] = ["Oh Mylanta!", form.question1];
-            answersAndObjects[1] = ["Jodie Sweetin", form.question2];
-            answersAndObjects[2] = ["D.J.", form.question3];
-            answersAndObjects[3] = ["Steve", form.question4];
-
-            var theScore = 0;
-
-            for (i = 0; i < answersAndObjects.length; i++) {
-                currQuestionObject = answersAndObjects[i][1];
-                for (j = 0; j < currQuestionObject.length; j++) {
-                    if (currQuestionObject[j].checked && currQuestionObject[j].value == answersAndObjects[i][0]) {
-                        theScore++;
-                        break;
-                    }
-
-                }
-            }
-
-            theScore = Math.round(theScore / answersAndObjects.length * 100);
-            form.percentage.value = theScore + "%";
-        }
-        getScore();
-        
-
-
-        // click submit to stop timer
-        $("#submitAnswers").click(function () {
-            $('#timer').hide();
-            $('#questions').hide();
-            $('#playerAnswers').show();
-            $('#results').show();
-            clearTimeout(time);
+            //add this question and its answers to the output
+            output.push(
+                `<div class="slide">
+                <div class="question"> ${currentQuestion.question}</div>
+                <div class="answers"> ${answers.join("")} </div>`
+            );
         });
 
-});
+        //combine the output list into one string of HTML and put it on the page
+        quizContainer.innerHTML = output.join("");
+    } //end of buildQuiz
+
+    /////////////////////////Timer///////////////////////////////////
+
+    //time variables
+    var count = 60;
+    var intervalId;
+
+    //timer function (interval-solved class solution)
+    //when button is clicked, they will trigger the stop or run
+    $("#timeLeft").on("click", runTimer);
+
+    function runTimer() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+    }
+
+    function decrement() {
+        //decrease count by 1
+        count--;
+        //show timer in tag id
+        $("#timeLeft").html("<h2>" + count + "</h2>");
+
+        //once timer hits zero
+        if (count === 0) {
+            stop();
+            alert("Times Up!");
+            showResults(); //if time runs out, show results
+        }
+    }
+    //clear intervalId
+    function stop() {
+        clearInterval(intervalId);
+    }
+    //end of Timer function
+
+    /////////////////////Show Results//////////////////////////////////
+    function showResults() {
+        $('#results').show(); //show at end of quiz
+        $('#playerAnswers').show(); //show at end of quiz
+        //gather answer containers from the quiz
+        const answerContainers = quizContainer.querySelectorAll(".answers");
+
+        //keep track of user's answers
+        let numCorrect = 0;
+
+        triviaQuestions.forEach((currentQuestion, questionNumber) => {
+            //find selected answer
+            const answerContainer = answerContainers[questionNumber];
+            const selector = `input[name=question${questionNumber}]:checked`;
+            const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+            //if answer is correct
+            if (userAnswer === currentQuestion.correctAnswer) {
+                //add to the number of correct answers
+                numCorrect++;
+
+                //color the answers green
+                answerContainers[questionNumber].style.color = 'lightgreen';
+            }
+            //if answer is wrong or blank
+            else {
+                //color the answers red
+                answerContainers[questionNumber].style.color = 'red';
+            }
+        });
+
+        //show number of correct answers out of total
+        resultsContainer.innerHTML = `${numCorrect} out of ${triviaQuestions.length}`;
+    } //end of showResults
+
+    function showSlide(n) {
+        slides[currentSlide].classList.remove("active-slide");
+        slides[n].classList.add("active-slide");
+        currentSlide = n;
+
+        if (currentSlide === 0) {
+            previousButton.style.display = "none";
+        } else {
+            previousButton.style.display = "inline-block";
+        }
+
+        if (currentSlide === slides.length - 1) {
+            nextButton.style.display = "none";
+            submitButton.style.display = "inline-block";
+        } else {
+            nextButton.style.display = "inline-block";
+            submitButton.style.display = "none";
+        }
+    }
+
+    function showNextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function showPreviousSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    const quizContainer = document.getElementById("quiz");
+    const resultsContainer = document.getElementById("results");
+    const submitButton = document.getElementById("submit");
+
+    //display quiz 
+    buildQuiz();
+    runTimer();
+
+    //on submit, show results
+    const previousButton = document.getElementById("previous");
+    const nextButton = document.getElementById("next");
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    showSlide(0);
+
+    //on submit, show results
+    submitButton.addEventListener("click", showResults);
+    previousButton.addEventListener("click", showPreviousSlide);
+    nextButton.addEventListener("click", showNextSlide);
+
+})();
 
  //end of Trivia Game

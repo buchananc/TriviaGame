@@ -5,92 +5,35 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Fuller House Trivia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
         <link href="https://fonts.googleapis.com/css?family=Abel|Baloo+Paaji|Bubblegum+Sans|Carme|Didact+Gothic|Rammetto+One" rel="stylesheet">
+        <link href="assets/css/reset.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
     </head>
-    <body>
-        <div class="container">
-            <div id="welcomeScreen">
-                <h3>Welcome to</h3>
-                <div id="fullerLogo"><img src="assets/images/FullerHouseLogo.png" alt="Fuller House Logo"></div>
-                <h2>Trivia</h2>
-                <br>
-                <p class="directions">You will have 1 minute to answer 10 questions.</p>
-                <div id="startDiv">
-                    <button type="button" id="startbtn" class="btn btn primary">Got it Dude!</button>
+        <body>
+            <div class="container">
+                <div id="welcomeScreen">
+                    <h3>Welcome to</h3>
+                    <div id="fullerLogo">
+                        <img src="assets/images/FullerHouseLogo.png" alt="Fuller House Logo" id="fullerImg">
+                    </div>
+                    <h2>Trivia</h2>
+                    <br>
+                    <p class="directions">You will have 1 minute to answer 10 questions.</p>
+                    <div id="startDiv">
+                        <button type="button" id="startbtn" class="btn btn primary">Got it Dude!</button>
+                    </div>
                 </div>
             </div>
-            
-            <div id="startScreen">
-                <header>Fuller House Trivia</header>
-                <div id="timeLeft"></div>
+
+            <div class="quiz-container">
+                <div id="timeLeft"></div>       
+                <div id="quiz"></div>
             </div>
-            
-            <div id="questions">
-                <form id="quiz" name="quiz">
-                    <p>What is DJs favorite saying?</p>
-                    <input type="radio" id="q1" name="question1" value="whoaBaby">Whoa baby!
-                    <br>
-                    <input type="radio" id="q1" name="question1" value="mylanta">Oh Mylanta!
-                    <br>
-                    <input type="radio" id="q1" name="question1" value="cutItOut">Cut. It. Out!
-                    <br>
-                    <input type="radio" id="q1" name="question1" value="haveMercy">Have mercy!
-
-                    <p>Which actress portrayed middle sister Stephanie Tanner?</p>
-                    <input type="radio" id="q2" name="question2" value="cameron">Candace Cameron
-                    <br>
-                    <input type="radio" id="q2" name="question2" value="olsen">Ashley Olsen
-                    <br>
-                    <input type="radio" id="q2" name="question2" value="sweetin">Jodie Sweetin
-                    <br>
-                    <input type="radio" id="q2" name="question2" value="barber">Andrea Barber
-                    <br>
-
-                    <p>In Full House, Danny Tanner was a widower. Which of his daughters took on the role of widow in Fuller House?</p>
-                    <input type="radio" id="q3" name="question3" value="dj">D.J.
-                    <br>
-                    <input type="radio" id="q3" name="question3" value="stephanie">Stephanie
-                    <br>
-                    <input type="radio" id="q3" name="question3" value="michelle">Michelle
-                    <br>
-                    <input type="radio" id="q3" name="question3" value="kimmy">Kimmy
-                    <br>
-
-                    <p>Which of D.J. Tanner's high school boyfriends returned in season 1?</p>
-                    <input type="radio" id="q4" name="question4" value="scott">Scott
-                    <br>
-                    <input type="radio" id="q4" name="question4" value="steve">Steve
-                    <br>
-                    <input type="radio" id="q4" name="question4" value="dave">Dave
-                    <br>
-                    <input type="radio" id="q4" name="question4" value="robert">Robert
-                    <br>
-                    <span ></span>
-                    <!-- <a href="JavaScript:getScore(document.forms['quiz']);">Mark Answers</a> -->
-                    <br>
-                    <p>Percentage: 
-                        <input type="text" name="percentage" readonly>
-                    </p>
-                </form>
-                <button type="button" id="submitAnswers">Submit</button>
-
-                <div id="playerAnswers">
-                    <h2>Here's your results:</h2>
-                    <p id="correctChoices">Correct Answers: </p>
-                    <p id="wrongChoices">Wrong Answers: </p>
-                </div>
-                
-                <div id="results">
-                    <h2>Time's Up!</h2>
-                    <p>Here's your results:</p>
-                    <p id="correctNoTimeLeft">Correct Answers: </p>
-                    <p id="wrongNoTimeLeft">Wrong Answers: </p>
-                </div>
-            </div>
-        </div>
+            <button id="previous">Previous Question</button>
+            <button id="next">Next Question</button>
+            <button id="submit">Submit Quiz</button>
+            <div id="results"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="./assets/javascript/app.js"></script>
-    </body>
-    
+    </body>   
 </html>
