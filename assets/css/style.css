@@ -118,10 +118,6 @@ h2 {
     to {top: 0px;}
 }
 
-#startbtn {
-    /* transition: width 2s, height 2s, transform 2s; */
-}
-
 #startbtn:hover {
     -webkit-transform: rotate(360deg); /* Safari */
     transform: rotate(360deg);

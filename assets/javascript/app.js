@@ -1,29 +1,18 @@
 $(document).ready(function () {
-    $('#startScreen').hide();
     $('.quiz-container').hide();
     $('#previous').hide();
     $('#next').hide();
     $('#submit').hide();
     $('#timeLeft').hide();
-    $('#results').hide(); //show at end of quiz
-    $('#playerAnswers').hide(); //show at end of quiz
-    // $('#currentQuestion').hide();
-    $('.question').hide();
-    $('.answers').hide();
 });
 
 // click to start then display questions
 $("#startbtn").click(function () {
     $('#welcomeScreen').hide();
-    $('#startScreen').show();
     $('.quiz-container').show();
     $('#previous').show();
     $('#next').show();
     $('#submit').show();
-    $('#timeLeft').show();
-    // $('#currentQuestion').show();
-    $('.question').show();
-    $('.answers').show();
 
     const triviaQuestions = [
         {
@@ -144,7 +133,7 @@ $("#startbtn").click(function () {
                 //...add HTML radio button
                 answers.push(
                     `<label>
-                    <input type="radio" name="question${questionNumber}" value="${letter}'>
+                    <input type="radio" name="question${questionNumber}" value="${letter}">
                     ${letter} :
                     ${currentQuestion.answers[letter]}
                     </label>`
@@ -155,7 +144,8 @@ $("#startbtn").click(function () {
             output.push(
                 `<div class="slide">
                 <div class="question"> ${currentQuestion.question}</div>
-                <div class="answers"> ${answers.join("")} </div>`
+                <div class="answers"> ${answers.join("")} </div>
+                </div>`
             );
         });
 
@@ -170,7 +160,7 @@ $("#startbtn").click(function () {
     var intervalId;
 
     //timer function (interval-solved class solution)
-    //when button is clicked, they will trigger the stop or run
+    //when button is clicked, it will trigger the stop or run
     $("#timeLeft").on("click", runTimer);
 
     function runTimer() {
@@ -199,8 +189,8 @@ $("#startbtn").click(function () {
 
     /////////////////////Show Results//////////////////////////////////
     function showResults() {
-        $('#results').show(); //show at end of quiz
-        $('#playerAnswers').show(); //show at end of quiz
+        // $('#results').show(); //show at end of quiz
+        // $('#playerAnswers').show(); //show at end of quiz
         //gather answer containers from the quiz
         const answerContainers = quizContainer.querySelectorAll(".answers");
 
@@ -281,6 +271,6 @@ $("#startbtn").click(function () {
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
 
-})();
+});
 
  //end of Trivia Game
