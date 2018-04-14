@@ -6,10 +6,6 @@ font-family: 'Didact Gothic', sans-serif;
 font-family: 'Carme', sans-serif;*/
  
 
-/* html, body{
-    height: 100%;
-} */
-
 body { 
     background-image: url(../images/golden-gate-bridge-1081782.jpg);
     background-position: center center;
@@ -186,26 +182,23 @@ button:hover {
 }
 
 .quiz-container {
-    position: relative;
-    height: 200px;
-    margin-top: 15px;
+    /* position: relative; */
+    height: 250px;
+    width: 71%;
+    margin: 15px auto 0 auto; 
 }
 
 #quiz {
-    margin-left: auto;
-    margin-right: auto;
+    top: 20%;
+    transform: translateX(10px);
     font-family: 'Carme', sans-serif;
 }
 
 .slide {
     position: absolute;
-    left: 0px;
     top: 0px;
-    z-index: 1;
-    opacity: 0;
     transition: opacity 0.5s;
     margin-top: 25px;
-    width: 75%;
     background-color: white;
     padding: 15px 15px 0 15px;
 }
@@ -213,5 +206,9 @@ button:hover {
 .active-slide {
     opacity: 1;
     z-index: 2;
+}
+
+#results {
+    margin-top: 20px;
 }
 
