@@ -10,6 +10,7 @@ $(document).ready(function () {
 $("#startbtn").click(function () {
     $('#welcomeScreen').hide();
     $('.quiz-container').show();
+    $('#timeLeft').show();
     $('#previous').show();
     $('#next').show();
     $('#submit').show();
@@ -171,12 +172,13 @@ $("#startbtn").click(function () {
         //decrease count by 1
         count--;
         //show timer in tag id
-        $("#timeLeft").html("<h2>" + count + "</h2>");
+        $("#timeLeft").html("<h1>Time Remaining:</h1> <br> <h2>" + count + "</h2>");
 
         //once timer hits zero
         if (count === 0) {
             stop();
             alert("Times Up!");
+            $('#timeLeft').hide(); //hide timer
             showResults(); //if time runs out, show results
         }
     }
@@ -213,7 +215,7 @@ $("#startbtn").click(function () {
             }
             else {
                 //color the answers red
-                answerContainers[questionNumber].style.color = 'red';
+                answerContainers[questionNumber].style.color = '#de3607';
             }  
         });
         //amount of questions
@@ -227,9 +229,9 @@ $("#startbtn").click(function () {
         var amountMissed = quesLength - correctLength;
 
         //show number of correct answers out of total
-        $("#numberRight").html("<h1>Oh mylanta!</h1> <br> <h1>You got " + correctLength + " correct!</h1><br><br>");
-        $("#numberWrong").html("<h1>Holy chalupas!</h1> <br> <h1>You missed " + amountMissed + ".</h1><br><br>");
-        // $("#numberUnanswered").html("<h1>Cut it out! You skipped " + questionsSkipped + " questions.</h1>");
+        $("#numberRight").html("<h1>Oh mylanta!</h1> <br> <h1>You got " + correctLength + " questions correct!</h1><br><br>");
+        $("#numberWrong").html("<h1>Holy chalupas!</h1> <br> <h1>You missed " + amountMissed + " questions.</h1><br><br>");
+        $('#timeLeft').hide();
     } //end of showResults
 
     function showSlide(n) {
@@ -280,6 +282,7 @@ $("#startbtn").click(function () {
         function endTrivia () {
             showResults();
             stop();
+            $('#timeLeft').hide();
         }; //timer might end here too
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
