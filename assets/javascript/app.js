@@ -131,7 +131,7 @@ $("#startbtn").click(function () {
 
             //and each available answer
             for (letter in currentQuestion.answers) {
-                //...add HTML radio button
+                //add HTML radio button
                 answers.push(
                     `<label>
                     <input type="radio" name="question${questionNumber}" value="${letter}">
@@ -234,6 +234,7 @@ $("#startbtn").click(function () {
         $('#timeLeft').hide();
     } //end of showResults
 
+    //////////////////Slides for Questions////////////////////////
     function showSlide(n) {
         slides[currentSlide].classList.remove("active-slide");
         slides[n].classList.add("active-slide");
@@ -253,7 +254,7 @@ $("#startbtn").click(function () {
             submitButton.style.display = "none";
         }
     }
-
+    //
     function showNextSlide() {
         showSlide(currentSlide + 1);
     }
@@ -283,7 +284,7 @@ $("#startbtn").click(function () {
             showResults();
             stop();
             $('#timeLeft').hide();
-        }; //timer might end here too
+        } //timer might end here too
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
 
