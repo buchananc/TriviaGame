@@ -134,7 +134,6 @@ $("#startbtn").click(function () {
                 answers.push(
                     `<label>
                     <input type="radio" name="question${questionNumber}" value="${letter}">
-                    ${letter} :
                     ${currentQuestion.answers[letter]}
                     </label>`
                 );
@@ -189,20 +188,21 @@ $("#startbtn").click(function () {
 
     /////////////////////Show Results//////////////////////////////////
     function showResults() {
-        // $('#results').show(); //show at end of quiz
-        // $('#playerAnswers').show(); //show at end of quiz
+
         //gather answer containers from the quiz
         const answerContainers = quizContainer.querySelectorAll(".answers");
 
         //keep track of user's answers
         let numCorrect = 0;
 
+        let quesSkipped = 0;
+
         triviaQuestions.forEach((currentQuestion, questionNumber) => {
             //find selected answer
             const answerContainer = answerContainers[questionNumber];
             const selector = `input[name=question${questionNumber}]:checked`;
             const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
+            
             //if answer is correct
             if (userAnswer === currentQuestion.correctAnswer) {
                 //add to the number of correct answers
@@ -211,15 +211,25 @@ $("#startbtn").click(function () {
                 //color the answers green
                 answerContainers[questionNumber].style.color = 'lightgreen';
             }
-            //if answer is wrong or blank
             else {
                 //color the answers red
                 answerContainers[questionNumber].style.color = 'red';
-            }
+            }  
         });
+        //amount of questions
+        var quesLength = triviaQuestions.length;
+        var quesLengthA = parseInt(quesLength);
+
+        //amount of correct answers
+        var correctLength = parseInt(numCorrect);
+
+        //amount missed
+        var amountMissed = quesLength - correctLength;
 
         //show number of correct answers out of total
-        resultsContainer.innerHTML = `${numCorrect} out of ${triviaQuestions.length}`;
+        $("#numberRight").html("<h1>Oh mylanta!</h1> <br> <h1>You got " + correctLength + " correct!</h1><br><br>");
+        $("#numberWrong").html("<h1>Holy chalupas!</h1> <br> <h1>You missed " + amountMissed + ".</h1><br><br>");
+        // $("#numberUnanswered").html("<h1>Cut it out! You skipped " + questionsSkipped + " questions.</h1>");
     } //end of showResults
 
     function showSlide(n) {
@@ -254,11 +264,10 @@ $("#startbtn").click(function () {
     const resultsContainer = document.getElementById("results");
     const submitButton = document.getElementById("submit");
 
-    //display quiz 
-    buildQuiz();
+    //display quiz and timer
     runTimer();
+    buildQuiz();
 
-    //on submit, show results
     const previousButton = document.getElementById("previous");
     const nextButton = document.getElementById("next");
     const slides = document.querySelectorAll(".slide");
@@ -267,7 +276,11 @@ $("#startbtn").click(function () {
     showSlide(0);
 
     //on submit, show results
-    submitButton.addEventListener("click", showResults);
+    submitButton.addEventListener("click", endTrivia);
+        function endTrivia () {
+            showResults();
+            stop();
+        }; //timer might end here too
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
 
