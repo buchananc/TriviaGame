@@ -211,6 +211,7 @@ button:hover {
 
 #results {
     margin-top: 20px;
+    background-color: white;
 }
 
 #mylanta {
@@ -233,6 +234,7 @@ button:hover {
 
 .score {
     font-size: 2.2em;
+    color: black;
 }
 
 #audioControl {
