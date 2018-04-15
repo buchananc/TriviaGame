@@ -71,15 +71,6 @@ $("#startbtn").click(function () {
             },
             correctAnswer: "a"
         }, {
-            question: "Who has the most kids?",
-            answers: {
-                a: "Uncle Jesse",
-                b: "Danny Tanner",
-                c: "DJ Tanner",
-                d: "Uncle Joey"
-            },
-            correctAnswer: "d"
-        }, {
             question: "Where did Fernando and Kimmy meet?",
             answers: {
                 a: "At a club",
@@ -116,6 +107,16 @@ $("#startbtn").click(function () {
             },
             correctAnswer: "a"
         }
+        //  {
+        //     question: "Who has the most kids?",
+        //     answers: {
+        //         a: "Uncle Jesse",
+        //         b: "Danny Tanner",
+        //         c: "DJ Tanner",
+        //         d: "Uncle Joey"
+        //     },
+        //     correctAnswer: "d"
+        // },
     ]; //end of trivia questions
 
     //////////////////Create Quiz/////////////////////////////
@@ -229,6 +230,7 @@ $("#startbtn").click(function () {
         var amountMissed = quesLength - correctLength;
 
         //show number of correct answers out of total
+        $("#pageBreak").html("<hr size='5' color='white'>")
         $("#numberRight").html("<h1 id='mylanta'>Oh mylanta!</h1> <br> <h1 class='score'>You got " + correctLength + " questions correct!</h1><br><br>");
         $("#numberWrong").html("<h1 id='chalupas'>Holy chalupas!</h1> <br> <h1 class='score'>You missed " + amountMissed + " questions.</h1><br><br>");
         $('#timeLeft').hide();
@@ -275,6 +277,10 @@ $("#startbtn").click(function () {
         audio.volume = 0.2;
     }
 
+    function musicEnds(p_audio) {
+        audio.muted = true;
+    };
+
     //display quiz and timer
     runTimer();
     buildQuiz();
@@ -293,6 +299,8 @@ $("#startbtn").click(function () {
             showResults();
             stop();
             $('#timeLeft').hide();
+            musicEnds();
+
         } //timer might end here too
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);

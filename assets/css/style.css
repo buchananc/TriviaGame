@@ -150,7 +150,7 @@ h1 {
 
 #button-container {
     text-align: center;
-
+    margin-top: 120px;
 }
 
 button {
@@ -182,17 +182,16 @@ button:hover {
 }
 
 .quiz-container {
-    /* position: relative; */
-    height: 250px;
-    width: 71%;
-    margin: 15px auto 0 auto; 
+    position: relative;
+    height: 150px;
+    width: 450px;
+    margin: 0 auto; 
 }
 
 #quiz {
     top: 20%;
-    transform: translateX(10px);
+    transform: translateX(0px);
     font-family: 'Carme', sans-serif;
-    position: inherit;
 }
 
 .slide {
@@ -202,6 +201,7 @@ button:hover {
     margin-top: 25px;
     background-color: white;
     padding: 15px 15px 0 15px;
+    z-index: 1;
 }
 
 .active-slide {
