@@ -192,6 +192,7 @@ button:hover {
     top: 20%;
     transform: translateX(10px);
     font-family: 'Carme', sans-serif;
+    position: inherit;
 }
 
 .slide {
@@ -212,3 +213,28 @@ button:hover {
     margin-top: 20px;
 }
 
+#mylanta {
+    color: #009DA7;
+    font-family: 'Rammetto One', cursive;
+    text-shadow: -3px -2px 0 #FFF,
+    -4px 0px 0 #FFF,
+    0px -1px 0 #FFF,
+    0px 0px 0 #FFF;
+}
+
+#chalupas {
+    color: #de3607;
+    font-family: 'Rammetto One', cursive;
+    text-shadow: -3px -2px 0 #FFF,
+    -4px 0px 0 #FFF,
+    0px -1px 0 #FFF,
+    0px 0px 0 #FFF;
+}
+
+.score {
+    font-size: 2.2em;
+}
+
+#audioControl {
+    text-align: center;
+}

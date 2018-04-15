@@ -211,7 +211,7 @@ $("#startbtn").click(function () {
                 numCorrect++;
 
                 //color the answers green
-                answerContainers[questionNumber].style.color = 'lightgreen';
+                answerContainers[questionNumber].style.color = '#009DA7';
             }
             else {
                 //color the answers red
@@ -229,8 +229,8 @@ $("#startbtn").click(function () {
         var amountMissed = quesLength - correctLength;
 
         //show number of correct answers out of total
-        $("#numberRight").html("<h1>Oh mylanta!</h1> <br> <h1>You got " + correctLength + " questions correct!</h1><br><br>");
-        $("#numberWrong").html("<h1>Holy chalupas!</h1> <br> <h1>You missed " + amountMissed + " questions.</h1><br><br>");
+        $("#numberRight").html("<h1 id='mylanta'>Oh mylanta!</h1> <br> <h1 class='score'>You got " + correctLength + " questions correct!</h1><br><br>");
+        $("#numberWrong").html("<h1 id='chalupas'>Holy chalupas!</h1> <br> <h1 class='score'>You missed " + amountMissed + " questions.</h1><br><br>");
         $('#timeLeft').hide();
     } //end of showResults
 
@@ -267,9 +267,18 @@ $("#startbtn").click(function () {
     const resultsContainer = document.getElementById("results");
     const submitButton = document.getElementById("submit");
 
+    //play music
+    var audio = document.getElementById("myAudio");
+
+    function setHalfVolume() {
+        audio.play();
+        audio.volume = 0.2;
+    }
+
     //display quiz and timer
     runTimer();
     buildQuiz();
+    setHalfVolume();
 
     const previousButton = document.getElementById("previous");
     const nextButton = document.getElementById("next");
